@@ -4,35 +4,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
     <style>
-      body { margin: 0; font-family: -apple-system, system-ui, sans-serif; }
-      #log { position: fixed; left: 0; right: 0; bottom: 0; max-height: 40vh; overflow: auto;
-             background: rgba(0,0,0,.8); color: #fff; padding: 10px; font-size: 12px; }
+      body { margin: 0; }
+      model-viewer { width: 100%; height: 100vh; }
     </style>
   </head>
+
   <body>
     <model-viewer
-      id="mv"
-      src="Textured_mesh_3.glb"
+      src="model.glb"
+      ios-src="model.usdz"
       ar
       ar-modes="quick-look webxr scene-viewer"
       camera-controls
-      auto-rotate
-      style="width: 100%; height: 100vh;">
+      shadow-intensity="1">
     </model-viewer>
-
-    <div id="log">Loading…</div>
-
-    <script>
-      const mv = document.getElementById('mv');
-      const log = document.getElementById('log');
-      const write = (m) => (log.textContent += "\n" + m);
-
-      mv.addEventListener('load', () => { log.textContent = "✅ Model loaded."; });
-      mv.addEventListener('error', (e) => {
-        log.textContent = "❌ Model error.";
-        write(JSON.stringify(e.detail || {}, null, 2));
-      });
-      mv.addEventListener('ar-status', (e) => write("AR status: " + e.detail.status));
-    </script>
   </body>
 </html>
